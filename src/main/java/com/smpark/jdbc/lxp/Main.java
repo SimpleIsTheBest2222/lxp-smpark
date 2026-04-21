@@ -4,17 +4,19 @@ import java.sql.Connection;
 import java.util.Scanner;
 
 import com.smpark.jdbc.config.JDBCConnection;
+import com.smpark.jdbc.lxp.course.controller.CourseController;
+import com.smpark.jdbc.lxp.course.model.CourseDTO;
 
 public class Main {
 
 	public static void main(String[] args) {
 
 		try (Scanner sc = new Scanner(System.in);
-		     // Connection connection = JDBCConnection.getConnection();
+		     Connection connection = JDBCConnection.getConnection();
 		) {
 
 			while (true) {
-				// System.out.println("DB 연결 성공 : " + connection);
+				System.out.println("DB 연결 성공 : " + connection);
 
 				// 메인 화면 호출 메서드 생성함.
 				printMainMenu(sc);
@@ -127,7 +129,7 @@ public class Main {
 		sc.nextLine();
 
 		System.out.print("  강사 ID    : ");
-		int id = sc.nextInt();
+		int instructorId = sc.nextInt();
 		sc.nextLine();
 
 		System.out.print("  난이도    : ");
@@ -135,6 +137,17 @@ public class Main {
 
 		System.out.print("  강의 설명    : ");
 		String description = sc.nextLine();
+
+		// CourseController 해서 컨트롤러로 던짐
+		CourseDTO courseDTO = new CourseDTO();
+		courseDTO.setTitle(title);
+		courseDTO.setPrice(price);
+		courseDTO.setInstructorId(instructorId);
+		courseDTO.setLevel(level);
+		courseDTO.setDescription(description);
+
+		CourseController courseController = new CourseController();
+		courseController.courseCreate(courseDTO);
 
 /*
 		컨텐츠 생성 부분

@@ -10,7 +10,7 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		// 호출 흐름 순서 Main -> View -> Controller -> Service -> Repository
+		// 호출 흐름 순서 Main -> View -> Controller -> Service -> Repositoryghgh
 
 		try (Scanner sc = new Scanner(System.in);
 		     Connection connection = JDBCConnection.getConnection();

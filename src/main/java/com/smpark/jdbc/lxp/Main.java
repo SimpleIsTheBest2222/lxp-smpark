@@ -29,16 +29,14 @@ public class Main {
 				sc.nextLine();
 
 				if (selectedNum == 1) {
-					System.out.println("강의 관리");
 					//  강의 관리 창 띄우기
 					courseView.showCourseMenu(sc);
 				} else if (selectedNum == 2) {
 					// 미구현
-					System.out.println("강사 관리");
 					break;
 				} else if (selectedNum == 3) {
 					// 미구현
-					System.out.println("종료합니다.");
+					// System.out.println("종료합니다.");
 					break;
 				} else {
 					System.out.println("잘못된 번호입니다.");

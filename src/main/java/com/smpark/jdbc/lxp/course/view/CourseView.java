@@ -30,13 +30,21 @@ public class CourseView {
 			System.out.println("------------------------------------------------------------");
 			System.out.print("> ");
 
-			long selectedNum = sc.nextLong();
-			sc.nextLine();
+			String input = sc.nextLine();
+
+			int selectedNum;
+			try {
+				selectedNum = Integer.parseInt(input);
+			} catch (NumberFormatException e) {
+				System.out.println("숫자만 입력해주세요.");
+				continue;
+			}
 
 			if (selectedNum == 1) {
 				showCourseRegisterMenu(sc);
 			} else if (selectedNum == 2) {
-				break;
+				System.out.println("강의 조회 기능 구현 예정입니다.");
+				continue;
 			} else if (selectedNum == 3) {
 				break;
 			} else {
@@ -56,7 +64,6 @@ public class CourseView {
 		System.out.println("  강의 정보를 입력하세요.");
 		System.out.println();
 
-		// 유효성 검사는 CRUD 뼈대 생성이후에 할 예정.
 		String title;
 		while (true) {
 			System.out.print("강의 제목    : ");
@@ -67,30 +74,51 @@ public class CourseView {
 				System.out.println("[오류] 제목은 필수입니다.");
 				continue;
 			}
-
-			if (title.length() > 50) {
-				System.out.println("[오류] 제목은 50자 이하로 입력해 주세요.");
-				continue;
-			}
-
 			break;
 		}
 
-		// 유효성 검사는 CRUD 뼈대 생성이후에 할 예정
-		System.out.print("가격    : ");
-		long price = sc.nextLong();
-		sc.nextLine();
+		// price 유효성 검사는 CRUD 뼈대 생성이후에 할 예정
+		long price;
+		while (true) {
+			System.out.print("가격    : ");
+			String priceInput = sc.nextLine();
 
-		// 유효성 검사는 CRUD 뼈대 생성이후에 할 예정
-		System.out.print("강사 ID    : ");
-		long instructorId = sc.nextLong();
-		sc.nextLine();
+			try {
+				price = Long.parseLong(priceInput);
+				break;
+			} catch (Exception e) {
+				System.out.println("[오류] 가격은 숫자로 입력해 주세요.");
+			}
+		}
 
-		// 유효성 검사는 CRUD 뼈대 생성이후에 할 예정
-		System.out.print("난이도    : ");
-		String level = sc.nextLine();
+		// instructorId 유효성 검사는 CRUD 뼈대 생성이후에 할 예정
+		long instructorId;
+		while (true) {
+			System.out.print("강사 ID    : ");
+			String instructorIdInput = sc.nextLine();
 
-		// 유효성 검사는 CRUD 뼈대 생성이후에 할 예정
+			try {
+				instructorId = Long.parseLong(instructorIdInput);
+				break;
+			} catch (Exception e) {
+				System.out.println("[오류] 강사 ID는 숫자로 입력해 주세요.");
+			}
+		}
+
+		// courseLevel 유효성 검사는 CRUD 뼈대 생성이후에 할 예정
+		CourseLevel courseLevel;
+		while (true) {
+			System.out.print("난이도(LOW/MIDDLE/HIGH)    : ");
+			String level = sc.nextLine();
+			try {
+				courseLevel = CourseLevel.valueOf(level.trim().toUpperCase());
+				break;
+			} catch (Exception e) {
+				System.out.println("[오류] 난이도는 LOW, MIDDLE, HIGH 중 하나여야 합니다.");
+			}
+		}
+
+		// 강의 설명 유효성 검사는 CRUD 뼈대 생성이후에 할 예정
 		System.out.print("강의 설명    : ");
 		String description = sc.nextLine();
 
@@ -99,7 +127,7 @@ public class CourseView {
 		courseDTO.setTitle(title);
 		courseDTO.setPrice(price);
 		courseDTO.setInstructorId(instructorId);
-		courseDTO.setLevel(CourseLevel.valueOf(level.toUpperCase()));
+		courseDTO.setLevel(courseLevel);
 		courseDTO.setDescription(description);
 
 		courseController.courseCreate(courseDTO);

@@ -25,18 +25,25 @@ public class Main {
 				// 메인 화면 호출 메서드
 				printMainMenu();
 
-				int selectedNum = sc.nextInt();
-				sc.nextLine();
+				String input = sc.nextLine();
+
+				int selectedNum;
+				try {
+					selectedNum = Integer.parseInt(input);
+				} catch (NumberFormatException e) {
+					System.out.println("숫자만 입력해주세요.");
+					continue;
+				}
 
 				if (selectedNum == 1) {
 					//  강의 관리 창 띄우기
 					courseView.showCourseMenu(sc);
 				} else if (selectedNum == 2) {
 					// 미구현
-					break;
+					System.out.println("강사 관리 기능은 아직 구현되지 않았습니다.");
+					continue;
 				} else if (selectedNum == 3) {
-					// 미구현
-					// System.out.println("종료합니다.");
+					System.out.println("종료합니다.");
 					break;
 				} else {
 					System.out.println("잘못된 번호입니다.");
@@ -45,7 +52,9 @@ public class Main {
 			}
 
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			// 사용자용 오류 메시지
+			System.out.println("프로그램 실행 중 오류가 발생했습니다.");
+			System.out.println("오류 내용: " + e.getMessage());
 		}
 	}
 
@@ -62,7 +71,6 @@ public class Main {
 		System.out.println();
 		System.out.println("------------------------------------------------------------");
 		System.out.print("> ");
-
 	}
 
 }

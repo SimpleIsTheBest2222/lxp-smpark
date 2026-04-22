@@ -4,51 +4,44 @@ import java.sql.Connection;
 import java.util.Scanner;
 
 import com.smpark.jdbc.config.JDBCConnection;
-import com.smpark.jdbc.lxp.course.controller.CourseController;
-import com.smpark.jdbc.lxp.course.model.CourseDTO;
+import com.smpark.jdbc.lxp.course.view.CourseView;
 
 public class Main {
 
 	public static void main(String[] args) {
 
+		// 호출 흐름 순서 Main -> View -> Controller -> Service -> Repository
+
 		try (Scanner sc = new Scanner(System.in);
 		     Connection connection = JDBCConnection.getConnection();
 		) {
 
+			//Main에서 만든 connection 을 CouseView 생성자에게 넘김
+			CourseView courseView = new CourseView(connection);
+
 			while (true) {
 				System.out.println("DB 연결 성공 : " + connection);
 
-				// 메인 화면 호출 메서드 생성함.
-				printMainMenu(sc);
+				// 메인 화면 호출 메서드
+				printMainMenu();
 
-				// 메인 화면 호출하고 나서 입력받기.
-				// 입력값을 int 로 바로 받기.
 				int selectedNum = sc.nextInt();
-				// 버퍼 비우기
 				sc.nextLine();
 
-				// 만약에 입력한 값이 1번이면 강의관리 화면 띄우고
 				if (selectedNum == 1) {
-					// System.out.println("강의 관리");
-					// 강의 관리 호출하는 메서드 생성함.
-					// sc 를 한군데 선언하고 쓰려고 sc 를 매개변수로 넘김
-					showCourseMenu(sc);
-
-					break;
-				}
-				// 만약에 입력한 값이 2번이면 강사 관리 화면 띄우고
-				else if (selectedNum == 2) {
+					System.out.println("강의 관리");
+					//  강의 관리 창 띄우기
+					courseView.showCourseMenu(sc);
+				} else if (selectedNum == 2) {
+					// 미구현
 					System.out.println("강사 관리");
 					break;
-				}
-				// 만약에 입력한 값이 3번이면 프로그램을 종료해라.
-				else if (selectedNum == 3) {
-					// 이거 요구사항 확인 필요함
+				} else if (selectedNum == 3) {
+					// 미구현
 					System.out.println("종료합니다.");
 					break;
 				} else {
 					System.out.println("잘못된 번호입니다.");
-					break;
 				}
 
 			}
@@ -58,11 +51,11 @@ public class Main {
 		}
 	}
 
-	public static void printMainMenu(Scanner sc) {
+	public static void printMainMenu() {
 
 		// 메인 화면 창 띄우기.
-		// 메인
 		System.out.println("============================================================");
+		System.out.println("                          강의 관리 콘솔                          ");
 		System.out.println("============================================================");
 		System.out.println();
 		System.out.println("  1. 강의 관리");
@@ -71,92 +64,6 @@ public class Main {
 		System.out.println();
 		System.out.println("------------------------------------------------------------");
 		System.out.print("> ");
-
-	}
-
-	public static void showCourseMenu(Scanner sc) {
-
-		while (true) {
-			// 강의 관리 창 띄우기
-			// 강의 관리
-			System.out.println("============================================================");
-			System.out.println("                          강의 관리 		                     ");
-			System.out.println("============================================================");
-			System.out.println();
-			System.out.println("  1. 강의 등록");
-			System.out.println("  2. 강사 조회");
-			System.out.println("  3. 뒤로 가기");
-			System.out.println();
-			System.out.println("------------------------------------------------------------");
-			System.out.print("> ");
-
-			int selectedNum = sc.nextInt();
-			sc.nextLine();
-
-			if (selectedNum == 1) {
-				System.out.println("1. 강의 등록입니다.");
-				showCourseRegisterMenu(sc);
-				break;
-			} else if (selectedNum == 2) {
-				System.out.println("2. 강사 조회입니다.");
-				break;
-			} else if (selectedNum == 3) {
-				System.out.println("3. 뒤로 가기입니다.");
-				break;
-			} else {
-				System.out.println("잘못된 번호입니다.");
-			}
-
-		}
-
-	}
-
-	public static void showCourseRegisterMenu(Scanner sc) {
-
-		// 1. 강의 등록입니다.
-		System.out.println("============================================================");
-		System.out.println("                           강의 등록                            ");
-		System.out.println("============================================================");
-		System.out.println();
-		System.out.println("  강의 정보를 입력하세요.");
-		System.out.println();
-
-		System.out.print("  강의 제목    : ");
-		String title = sc.nextLine();
-
-		System.out.print("  가격    : ");
-		int price = sc.nextInt();
-		sc.nextLine();
-
-		System.out.print("  강사 ID    : ");
-		int instructorId = sc.nextInt();
-		sc.nextLine();
-
-		System.out.print("  난이도    : ");
-		String level = sc.nextLine();
-
-		System.out.print("  강의 설명    : ");
-		String description = sc.nextLine();
-
-		// CourseController 해서 컨트롤러로 던짐
-		CourseDTO courseDTO = new CourseDTO();
-		courseDTO.setTitle(title);
-		courseDTO.setPrice(price);
-		courseDTO.setInstructorId(instructorId);
-		courseDTO.setLevel(level);
-		courseDTO.setDescription(description);
-
-		CourseController courseController = new CourseController();
-		courseController.courseCreate(courseDTO);
-
-/*
-		컨텐츠 생성 부분
-
-		System.out.println();
-		System.out.println("------------------------------------------------------------");
-		System.out.println("  콘텐츠를 추가하세요. (제목에 0 입력 시 완료)");
-		System.out.println("------------------------------------------------------------");
-*/
 
 	}
 

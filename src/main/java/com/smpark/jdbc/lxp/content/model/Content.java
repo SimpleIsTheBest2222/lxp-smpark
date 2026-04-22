@@ -1,17 +1,20 @@
-package com.smpark.jdbc.lxp.course.model;
+package com.smpark.jdbc.lxp.content.model;
 
 import java.time.LocalDateTime;
 
-public class Course {
+public class Content {
 
 	private long id;
 	private String title;
-	private long price;
-	private CourseLevel level;
-	private String description;
-	private long instructorId;
+	private String content;
+	private int seq;
+	private long courseId;
+	private ContentType contentType;
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
+
+	public Content() {
+	}
 
 	public long getId() {
 		return id;
@@ -29,36 +32,36 @@ public class Course {
 		this.title = title;
 	}
 
-	public long getPrice() {
-		return price;
+	public String getContent() {
+		return content;
 	}
 
-	public void setPrice(long price) {
-		this.price = price;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
-	public CourseLevel getLevel() {
-		return level;
+	public int getSeq() {
+		return seq;
 	}
 
-	public void setLevel(CourseLevel level) {
-		this.level = level;
+	public void setSeq(int seq) {
+		this.seq = seq;
 	}
 
-	public String getDescription() {
-		return description;
+	public long getCourseId() {
+		return courseId;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setCourseId(long courseId) {
+		this.courseId = courseId;
 	}
 
-	public long getInstructorId() {
-		return instructorId;
+	public ContentType getContentType() {
+		return contentType;
 	}
 
-	public void setInstructorId(long instructorId) {
-		this.instructorId = instructorId;
+	public void setContentType(ContentType contentType) {
+		this.contentType = contentType;
 	}
 
 	public LocalDateTime getCreatedAt() {

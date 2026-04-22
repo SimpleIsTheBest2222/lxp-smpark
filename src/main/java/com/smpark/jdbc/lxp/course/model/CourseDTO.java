@@ -2,37 +2,27 @@ package com.smpark.jdbc.lxp.course.model;
 
 public class CourseDTO {
 
+	private long id;
 	private String title;
 	private long price;
 	private CourseLevel level;
 	private String description;
 	private long instructorId;
 
-	public CourseDTO() {
+	public long getId() {
+		return id;
 	}
 
-	public String getDescription() {
-		return description;
+	public void setId(long id) {
+		this.id = id;
 	}
 
-	public long getInstructorId() {
-		return instructorId;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setInstructorId(long instructorId) {
-		this.instructorId = instructorId;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public CourseLevel getLevel() {
-		return level;
-	}
-
-	public void setLevel(CourseLevel level) {
-		this.level = level;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public long getPrice() {
@@ -43,11 +33,27 @@ public class CourseDTO {
 		this.price = price;
 	}
 
-	public String getTitle() {
-		return title;
+	public CourseLevel getLevel() {
+		return level;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setLevel(CourseLevel level) {
+		this.level = level;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public long getInstructorId() {
+		return instructorId;
+	}
+
+	public void setInstructorId(long instructorId) {
+		this.instructorId = instructorId;
 	}
 }

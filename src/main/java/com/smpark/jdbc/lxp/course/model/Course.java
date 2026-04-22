@@ -77,3 +77,5 @@ public class Course {
 		this.updatedAt = updatedAt;
 	}
 }
+
+

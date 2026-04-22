@@ -60,3 +60,4 @@ public class ContentDTO {
 		this.contentType = contentType;
 	}
 }
+

@@ -9,20 +9,27 @@ import com.smpark.jdbc.lxp.course.model.Course;
 import com.smpark.jdbc.lxp.course.model.CourseDTO;
 import com.smpark.jdbc.lxp.course.model.CourseDetailDTO;
 import com.smpark.jdbc.lxp.course.repository.CourseRepository;
+import com.smpark.jdbc.lxp.instructor.repository.InstructorRepository;
 
 public class CourseService {
 
 	private final CourseRepository courseRepository;
 	private final ContentService contentService;
+	private final InstructorRepository instructorRepository;
 
 	public CourseService(Connection connection) {
 		this.courseRepository = new CourseRepository(connection);
 		this.contentService = new ContentService(connection);
+		this.instructorRepository = new InstructorRepository(connection);
 	}
 
 	public long create(CourseDTO dto, List<ContentDTO> contents) {
 
 		validateCourse(dto);
+
+		if (!instructorRepository.existsById(dto.getInstructorId())) {
+			throw new IllegalArgumentException("존재하지 않는 강사입니다. 강사를 먼저 등록해주세요.");
+		}
 
 		Course course = new Course();
 		course.setTitle(dto.getTitle());
@@ -57,6 +64,11 @@ public class CourseService {
 
 	public void update(CourseDTO dto) {
 		validateCourse(dto);
+
+		if (!instructorRepository.existsById(dto.getInstructorId())) {
+			throw new IllegalArgumentException("존재하지 않는 강사입니다. 강사를 먼저 등록해주세요.");
+		}
+
 		courseRepository.update(dto);
 	}
 
@@ -83,7 +95,14 @@ public class CourseService {
 	}
 
 	public CourseDetailDTO findCourseDetail(long courseId) {
-		return courseRepository.findCourseDetail(courseId);
-	}
+		CourseDetailDTO detailDTO = courseRepository.findCourseDetail(courseId);
 
+		if (detailDTO == null) {
+			throw new IllegalArgumentException("해당 id의 강의를 찾을 수 없습니다. (id: " + courseId + ")");
+		}
+
+		return detailDTO;
+	}
 }
+
+

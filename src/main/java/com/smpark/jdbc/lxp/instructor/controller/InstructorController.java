@@ -39,3 +39,5 @@ public class InstructorController {
 		instructorService.delete(id);
 	}
 }
+
+

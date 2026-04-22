@@ -35,3 +35,5 @@ public class ContentController {
 		contentService.delete(id);
 	}
 }
+
+

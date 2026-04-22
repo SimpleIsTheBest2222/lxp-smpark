@@ -44,3 +44,4 @@ public class CourseDetailDTO {
 		this.contents = contents;
 	}
 }
+

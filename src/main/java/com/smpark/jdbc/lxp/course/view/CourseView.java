@@ -370,3 +370,5 @@ public class CourseView {
 		return "콘텐츠 내용";
 	}
 }
+
+

@@ -17,27 +17,28 @@ public class CourseController {
 		this.courseService = new CourseService(connection);
 	}
 
-	public long courseCreate(CourseDTO dto, List<ContentDTO> contents) {
-		return courseService.create(dto, contents);
+	// 강의 등록 + 콘텐츠 등록
+	public long courseCreate(CourseDTO courseDTO, List<ContentDTO> contentDTOList) {
+		return courseService.create(courseDTO, contentDTOList);
 	}
 
+	// 강의 전체 목록 조회
 	public List<Course> findAllCourses() {
 		return courseService.findAll();
 	}
 
-	public Course findCourse(long id) {
-		return courseService.findById(id);
+	// 강의 상세 조회
+	public CourseDetailDTO findCourseDetail(long courseId) {
+		return courseService.findCourseDetail(courseId);
 	}
 
-	public void updateCourse(CourseDTO dto) {
-		courseService.update(dto);
+	// 강의 정보 수정
+	public void updateCourse(CourseDTO courseDTO) {
+		courseService.update(courseDTO);
 	}
 
-	public void deleteCourse(long id) {
-		courseService.delete(id);
-	}
-
-	public CourseDetailDTO findCourseDetail(long id) {
-		return courseService.findCourseDetail(id);
+	// 강의 삭제
+	public void deleteCourse(long courseId) {
+		courseService.delete(courseId);
 	}
 }

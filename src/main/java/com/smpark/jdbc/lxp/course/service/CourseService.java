@@ -82,8 +82,8 @@ public class CourseService {
 			throw new IllegalArgumentException("설명은 필수입니다.");
 	}
 
-	public CourseDetailDTO findCourseDetail(long id) {
-		return courseRepository.findCourseDetail(id);
+	public CourseDetailDTO findCourseDetail(long courseId) {
+		return courseRepository.findCourseDetail(courseId);
 	}
 
 }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<properties>
+    <query key="course.create">
+        INSERT INTO courses
+        (title, description, price, createdAt, updatedAt, level, instructor_id)
+        VALUES (?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ?, ?)
+    </query>
+</properties>

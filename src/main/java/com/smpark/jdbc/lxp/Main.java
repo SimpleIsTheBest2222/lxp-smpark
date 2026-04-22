@@ -3,7 +3,7 @@ package com.smpark.jdbc.lxp;
 import java.sql.Connection;
 import java.util.Scanner;
 
-import com.smpark.jdbc.config.JDBCConnection;
+import com.smpark.jdbc.lxp.config.JDBCConnection;
 import com.smpark.jdbc.lxp.course.view.CourseView;
 
 public class Main {
